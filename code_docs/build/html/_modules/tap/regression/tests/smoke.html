@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tap.regression.tests.smoke &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tap.regression.tests.smoke</h1><div class="highlight"><pre>
+<span class="c">##########################################################</span>
+<span class="c"># PSU ECE510 Post-silicon Validation Projects</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Filename: smoke.py</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Purpose: TAP Controller Smoke Tests</span>
+<span class="c">##########################################################</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">tap.common.loopback</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tap.common.tap</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<div class="viewcode-block" id="smoke"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke">[docs]</a><span class="k">class</span> <span class="nc">smoke</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; smoke/power on tests, hopefully won&#39;t produce actual smoke &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="smoke.setUp"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; fires before each test</span>
+<span class="sd">        Setting up for the test</span>
+<span class="sd">    </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_level</span> <span class="o">=</span> <span class="n">LOG_LEVEL</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">(),</span> <span class="n">log_level</span><span class="p">)</span>
+        <span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="s">&#39;info&#39;</span><span class="p">,</span> <span class="s">&#39;{}Running {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color_map</span><span class="p">[</span><span class="s">&#39;highlight&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tap</span> <span class="o">=</span> <span class="n">Tap</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loopback_monitor</span> <span class="o">=</span> <span class="n">LoopBack</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="n">log_level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loopback_monitor</span><span class="o">.</span><span class="n">set_monitor</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="smoke.tearDown"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; fires after each test</span>
+<span class="sd">        Cleaning up after the test</span>
+<span class="sd">    </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loopback_monitor</span><span class="o">.</span><span class="n">remove_monitor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="n">clean_up</span><span class="p">()</span>
+        <span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="s">&#39;info&#39;</span><span class="p">,</span> <span class="s">&#39;{}Done with {}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color_map</span><span class="p">[</span><span class="s">&#39;highlight&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()))</span>    
+    </div>
+<div class="viewcode-block" id="smoke.testReset"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke.testReset">[docs]</a>    <span class="k">def</span> <span class="nf">testReset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s">&quot;Test_Logic_Reset&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">loopback_monitor</span><span class="o">.</span><span class="n">cur_state</span><span class="p">)</span>
+</div>
+    <span class="nd">@unittest.skip</span>
+<div class="viewcode-block" id="smoke.testReset2ShiftIR"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke.testReset2ShiftIR">[docs]</a>    <span class="k">def</span> <span class="nf">testReset2ShiftIR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</div>
+    <span class="nd">@unittest.skip</span>
+<div class="viewcode-block" id="smoke.testReadDeviceCode"><a class="viewcode-back" href="../../../../tap.regression.tests.html#tap.regression.tests.smoke.smoke.testReadDeviceCode">[docs]</a>    <span class="k">def</span> <span class="nf">testReadDeviceCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

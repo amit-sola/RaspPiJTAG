@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>log Package &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="index.html" />
+    <link rel="up" title="tap Package" href="tap.html" />
+    <link rel="next" title="model Package" href="tap.model.html" />
+    <link rel="prev" title="examples Package" href="tap.examples.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.model.html" title="model Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tap.examples.html" title="examples Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" accesskey="U">tap Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="log-package">
+<h1>log Package<a class="headerlink" href="#log-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tap.log.logging_setup">
+<span id="logging-setup-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">logging_setup</span></tt> Module<a class="headerlink" href="#module-tap.log.logging_setup" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tap.log.logging_setup.get_logger">
+<tt class="descclassname">tap.log.logging_setup.</tt><tt class="descname">get_logger</tt><big>(</big><em>name</em>, <em>level</em><big>)</big><a class="reference internal" href="_modules/tap/log/logging_setup.html#get_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.log.logging_setup.get_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a logger</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; name to use for the logger</li>
+<li><strong>level</strong> (<em>str</em>) &#8211; severity of the log</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">logging.Logger</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tap.log.logging_setup.log">
+<tt class="descclassname">tap.log.logging_setup.</tt><tt class="descname">log</tt><big>(</big><em>logger</em>, <em>level</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/tap/log/logging_setup.html#log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.log.logging_setup.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>log routine for TAP</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>logger</strong> (<em>logging.Logger</em>) &#8211; logger to use</li>
+<li><strong>level</strong> (<em>str</em>) &#8211; severity of the logged message</li>
+<li><strong>args</strong> (<em>tuple</em>) &#8211; variable length argument list</li>
+<li><strong>kwargs</strong> (<em>dict</em>) &#8211; keyworded variable length argument list</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tap.log.logging_setup.set_log_level">
+<tt class="descclassname">tap.log.logging_setup.</tt><tt class="descname">set_log_level</tt><big>(</big><em>level</em><big>)</big><a class="reference internal" href="_modules/tap/log/logging_setup.html#set_log_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.log.logging_setup.set_log_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tap.log.logging_setup.setup_logging">
+<tt class="descclassname">tap.log.logging_setup.</tt><tt class="descname">setup_logging</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/log/logging_setup.html#setup_logging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.log.logging_setup.setup_logging" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the logging configure file &amp; configure logging</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">log Package</a><ul>
+<li><a class="reference internal" href="#module-tap.log.logging_setup"><tt class="docutils literal"><span class="pre">logging_setup</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tap.examples.html"
+                        title="previous chapter">examples Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tap.model.html"
+                        title="next chapter">model Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tap.log.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.model.html" title="model Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tap.examples.html" title="examples Package"
+             >previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" >tap Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

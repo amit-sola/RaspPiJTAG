@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tap.common.tap &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tap.common.tap</h1><div class="highlight"><pre>
+<span class="c">##########################################################</span>
+<span class="c"># PSU ECE510 Post-silicon Validation Project 1</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Filename: tap.py</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Purpose: TAP Controller Class</span>
+<span class="c">##########################################################</span>
+
+<span class="kn">from</span> <span class="nn">tap.common.tap_gpio</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tap.log.logging_setup</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<div class="viewcode-block" id="Tap"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap">[docs]</a><span class="k">class</span> <span class="nc">Tap</span><span class="p">(</span><span class="n">Tap_GPIO</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Class for JTAG TAP Controller&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; initialize TAP &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">__file__</span><span class="p">,</span><span class="n">log_level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="mi">1000</span>
+
+        <span class="c">#set up the RPi TAP pins</span>
+        <span class="n">Tap_GPIO</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Tap.toggle_tck"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.toggle_tck">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_tck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tms</span><span class="p">,</span> <span class="n">tdi</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; toggle TCK for state transition </span>
+
+<span class="sd">        :param tms: data for TMS pin</span>
+<span class="sd">        :type tms: int (0/1)</span>
+<span class="sd">        :param tdi: data for TDI pin</span>
+<span class="sd">        :type tdi: int (0/1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">pass</span>
+       </div>
+<div class="viewcode-block" id="Tap.reset"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set TAP state to Test_Logic_Reset &quot;&quot;&quot;</span>
+        <span class="c"># assert TMS for 5 TCKs in a row</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Tap.reset2ShiftIR"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.reset2ShiftIR">[docs]</a>    <span class="k">def</span> <span class="nf">reset2ShiftIR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; shift TAP state from reset to shiftIR &quot;&quot;&quot;</span>
+        
+        <span class="k">pass</span> 
+</div>
+<div class="viewcode-block" id="Tap.exit1IR2ShiftDR"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.exit1IR2ShiftDR">[docs]</a>    <span class="k">def</span> <span class="nf">exit1IR2ShiftDR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; shift TAP state from exit1IR to shiftDR &quot;&quot;&quot;</span>
+
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Tap.exit1DR2ShiftIR"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.exit1DR2ShiftIR">[docs]</a>    <span class="k">def</span> <span class="nf">exit1DR2ShiftIR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; shift TAP state from exit1DR to shiftIR &quot;&quot;&quot;</span>
+        
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Tap.shiftInData"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.shiftInData">[docs]</a>    <span class="k">def</span> <span class="nf">shiftInData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tdi_str</span><span class="p">):</span>    
+        <span class="sd">&quot;&quot;&quot; shift in IR/DR data</span>
+
+<span class="sd">        :param tdi_str: TDI data to shift in</span>
+<span class="sd">        :type tdo_str: str</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Tap.shiftOutData"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.shiftOutData">[docs]</a>    <span class="k">def</span> <span class="nf">shiftOutData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; get IR/DR data</span>
+
+<span class="sd">        :param length: chain length        </span>
+<span class="sd">        :type length: int</span>
+<span class="sd">        :returns: int - TDO data</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="mi">0</span>
+</div>
+<div class="viewcode-block" id="Tap.getChainLength"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap.Tap.getChainLength">[docs]</a>    <span class="k">def</span> <span class="nf">getChainLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; get chain length</span>
+
+<span class="sd">        :returns: int -- chain length	</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="mi">0</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tap.log.logging_setup &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tap.log.logging_setup</h1><div class="highlight"><pre>
+<span class="c">##########################################################</span>
+<span class="c"># PSU ECE510 Post-silicon Validation Project 1</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Filename: logging_setup.py</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Purpose: logging configuration routines</span>
+<span class="c">##########################################################</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging.config</span>
+<span class="kn">import</span> <span class="nn">colorama</span>
+
+<span class="n">colorama</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+
+<div class="viewcode-block" id="set_log_level"><a class="viewcode-back" href="../../../tap.log.html#tap.log.logging_setup.set_log_level">[docs]</a><span class="k">def</span> <span class="nf">set_log_level</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">LOG_LEVEL</span>
+    <span class="n">LOG_LEVEL</span> <span class="o">=</span> <span class="n">level</span>
+</div>
+<div class="viewcode-block" id="setup_logging"><a class="viewcode-back" href="../../../tap.log.html#tap.log.logging_setup.setup_logging">[docs]</a><span class="k">def</span> <span class="nf">setup_logging</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; read the logging configure file &amp; configure logging &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span><span class="s">&#39;logging.json&#39;</span><span class="p">)</span>
+
+    <span class="c">#exception handling for Sphinx</span>
+    <span class="c">#try: </span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="c">#except:</span>
+    <span class="c">#    print(&quot;exception with logging.json file&quot;)</span>
+
+<span class="c">#logging color scheme</span></div>
+<span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;debug&#39;</span>     <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RESET</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">RESET_ALL</span><span class="p">,</span>
+    <span class="s">&#39;info&#39;</span>      <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RESET</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">RESET_ALL</span><span class="p">,</span>
+    <span class="s">&#39;warning&#39;</span>   <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">YELLOW</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">,</span>
+    <span class="s">&#39;error&#39;</span>     <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">,</span>
+    <span class="s">&#39;critical&#39;</span>  <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">,</span>
+    <span class="s">&#39;reset&#39;</span>     <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">RESET</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">RESET_ALL</span><span class="p">,</span>
+    <span class="s">&#39;highlight&#39;</span> <span class="p">:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Fore</span><span class="o">.</span><span class="n">CYAN</span> <span class="o">+</span> <span class="n">colorama</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">BRIGHT</span><span class="p">,</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="get_logger"><a class="viewcode-back" href="../../../tap.log.html#tap.log.logging_setup.get_logger">[docs]</a><span class="k">def</span> <span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; return a logger</span>
+
+<span class="sd">    :param name: name to use for the logger</span>
+<span class="sd">    :type name: str</span>
+<span class="sd">    :param level: severity of the log</span>
+<span class="sd">    :type level: str</span>
+<span class="sd">    :returns: logging.Logger </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> 
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logger</span>
+</div>
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../../../tap.log.html#tap.log.logging_setup.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; log routine for TAP</span>
+
+<span class="sd">    :param logger: logger to use</span>
+<span class="sd">    :type logger: logging.Logger</span>
+<span class="sd">    :param level: severity of the logged message</span>
+<span class="sd">    :type level: str</span>
+<span class="sd">    :param args: variable length argument list</span>
+<span class="sd">    :type args: tuple</span>
+<span class="sd">    :param kwargs: keyworded variable length argument list</span>
+<span class="sd">    :type kwargs: dict</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;extra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c">#kwargs[&#39;extra&#39;][&#39;level&#39;] = level.upper()</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;extra&#39;</span><span class="p">][</span><span class="s">&#39;COLOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_map</span><span class="p">[</span><span class="n">level</span><span class="p">]</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;extra&#39;</span><span class="p">][</span><span class="s">&#39;COLORRESET&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color_map</span><span class="p">[</span><span class="s">&#39;reset&#39;</span><span class="p">]</span>
+
+    <span class="nb">getattr</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="n">level</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

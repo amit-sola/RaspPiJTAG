@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tap.model.tap_model &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tap.model.tap_model</h1><div class="highlight"><pre>
+<span class="c">##########################################################</span>
+<span class="c"># PSU ECE510 Post-silicon Validation Project 1</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Filename: tap_model.py</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Purpose: TAP Controller Class</span>
+<span class="c">##########################################################</span>
+
+<div class="viewcode-block" id="Tap_Model"><a class="viewcode-back" href="../../../tap.model.html#tap.model.tap_model.Tap_Model">[docs]</a><span class="k">class</span> <span class="nc">Tap_Model</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; class for TAP model &quot;&quot;&quot;</span>
+    <span class="c">#TAP states </span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;Test_Logic_Reset&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Run_Test_Idle&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Test_Logic_Reset&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Run_Test_Idle&#39;</span>    <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Run_Test_Idle&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Select_DR_Scan&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Select_DR_Scan&#39;</span>   <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Capture_DR&#39;</span>   <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Select_IR_Scan&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Capture_DR&#39;</span>       <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_DR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit1_DR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Shift_DR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_DR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit1_DR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Exit1_DR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Pause_DR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Update_DR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Pause_DR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Pause_DR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit2_DR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Exit2_DR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_DR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Update_DR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Update_DR&#39;</span>        <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Run_Test_Idle&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Select_DR_Scan&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Select_IR_Scan&#39;</span>   <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Capture_IR&#39;</span>   <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Test_Logic_Reset&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Capture_IR&#39;</span>       <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_IR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit1_IR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Shift_IR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_IR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit1_IR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Exit1_IR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Pause_IR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Update_IR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Pause_IR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Pause_IR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Exit2_IR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Exit2_IR&#39;</span>         <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Shift_IR&#39;</span>     <span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Update_IR&#39;</span><span class="p">},</span>
+        <span class="s">&#39;Update_IR&#39;</span>        <span class="p">:</span> <span class="p">{</span><span class="s">&#39;0&#39;</span><span class="p">:</span><span class="s">&#39;Run_Test_Idle&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">:</span><span class="s">&#39;Select_DR_Scan&#39;</span><span class="p">},</span>
+    <span class="p">}</span> 
+
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set the cur_state to &#39;Test_Logic_Reset&#39; &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur_state</span> <span class="o">=</span> <span class="s">&#39;Test_Logic_Reset&#39;</span> 
+
+<div class="viewcode-block" id="Tap_Model.update_state"><a class="viewcode-back" href="../../../tap.model.html#tap.model.tap_model.Tap_Model.update_state">[docs]</a>    <span class="k">def</span> <span class="nf">update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tms</span><span class="p">,</span><span class="n">tck</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; update the cur_state </span>
+<span class="sd">        </span>
+<span class="sd">        :param tms: data for TMS pin</span>
+<span class="sd">        :type tms: int (0/1)</span>
+<span class="sd">        :param tck: data for TCK pin</span>
+<span class="sd">        :type tck: int (0/1)</span>
+<span class="sd">        :returns: str -- current state</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tck</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cur_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_state</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">tms</span><span class="p">)]</span>   
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_state</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

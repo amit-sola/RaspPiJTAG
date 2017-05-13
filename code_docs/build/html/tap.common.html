@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>common Package &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="index.html" />
+    <link rel="up" title="tap Package" href="tap.html" />
+    <link rel="next" title="examples Package" href="tap.examples.html" />
+    <link rel="prev" title="tap Package" href="tap.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.examples.html" title="examples Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tap.html" title="tap Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" accesskey="U">tap Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="common-package">
+<h1>common Package<a class="headerlink" href="#common-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tap.common.loopback">
+<span id="loopback-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">loopback</span></tt> Module<a class="headerlink" href="#module-tap.common.loopback" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tap.common.loopback.LoopBack">
+<em class="property">class </em><tt class="descclassname">tap.common.loopback.</tt><tt class="descname">LoopBack</tt><big>(</big><em>log_level=20</em><big>)</big><a class="reference internal" href="_modules/tap/common/loopback.html#LoopBack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.loopback.LoopBack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tap.model.html#tap.model.tap_model.Tap_Model" title="tap.model.tap_model.Tap_Model"><tt class="xref py py-class docutils literal"><span class="pre">tap.model.tap_model.Tap_Model</span></tt></a></p>
+<p>loopback monitor class</p>
+<dl class="method">
+<dt id="tap.common.loopback.LoopBack.remove_monitor">
+<tt class="descname">remove_monitor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/loopback.html#LoopBack.remove_monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.loopback.LoopBack.remove_monitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove interrupt based event detection for loopback pins</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.loopback.LoopBack.set_monitor">
+<tt class="descname">set_monitor</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/loopback.html#LoopBack.set_monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.loopback.LoopBack.set_monitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>set up interrupt based event detection for loopback pins</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.loopback.LoopBack.tck_callback">
+<tt class="descname">tck_callback</tt><big>(</big><em>pin</em><big>)</big><a class="reference internal" href="_modules/tap/common/loopback.html#LoopBack.tck_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.loopback.LoopBack.tck_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>call back routine for TCK loopback pin interrupt</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tap.common.tap">
+<span id="tap-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">tap</span></tt> Module<a class="headerlink" href="#module-tap.common.tap" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tap.common.tap.Tap">
+<em class="property">class </em><tt class="descclassname">tap.common.tap.</tt><tt class="descname">Tap</tt><big>(</big><em>log_level=20</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tap.common.tap_gpio.Tap_GPIO" title="tap.common.tap_gpio.Tap_GPIO"><tt class="xref py py-class docutils literal"><span class="pre">tap.common.tap_gpio.Tap_GPIO</span></tt></a></p>
+<p>Class for JTAG TAP Controller</p>
+<dl class="method">
+<dt id="tap.common.tap.Tap.exit1DR2ShiftIR">
+<tt class="descname">exit1DR2ShiftIR</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.exit1DR2ShiftIR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.exit1DR2ShiftIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>shift TAP state from exit1DR to shiftIR</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.exit1IR2ShiftDR">
+<tt class="descname">exit1IR2ShiftDR</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.exit1IR2ShiftDR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.exit1IR2ShiftDR" title="Permalink to this definition">¶</a></dt>
+<dd><p>shift TAP state from exit1IR to shiftDR</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.getChainLength">
+<tt class="descname">getChainLength</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.getChainLength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.getChainLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>get chain length</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; chain length</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>set TAP state to Test_Logic_Reset</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.reset2ShiftIR">
+<tt class="descname">reset2ShiftIR</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.reset2ShiftIR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.reset2ShiftIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>shift TAP state from reset to shiftIR</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.shiftInData">
+<tt class="descname">shiftInData</tt><big>(</big><em>tdi_str</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.shiftInData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.shiftInData" title="Permalink to this definition">¶</a></dt>
+<dd><p>shift in IR/DR data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tdi_str</strong> &#8211; TDI data to shift in</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.shiftOutData">
+<tt class="descname">shiftOutData</tt><big>(</big><em>length</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.shiftOutData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.shiftOutData" title="Permalink to this definition">¶</a></dt>
+<dd><p>get IR/DR data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<em>int</em>) &#8211; chain length</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int - TDO data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap.Tap.toggle_tck">
+<tt class="descname">toggle_tck</tt><big>(</big><em>tms</em>, <em>tdi</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap.html#Tap.toggle_tck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap.Tap.toggle_tck" title="Permalink to this definition">¶</a></dt>
+<dd><p>toggle TCK for state transition</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tms</strong> (<em>int (0/1)</em>) &#8211; data for TMS pin</li>
+<li><strong>tdi</strong> (<em>int (0/1)</em>) &#8211; data for TDI pin</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tap.common.tap_gpio">
+<span id="tap-gpio-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">tap_gpio</span></tt> Module<a class="headerlink" href="#module-tap.common.tap_gpio" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tap.common.tap_gpio.Tap_GPIO">
+<em class="property">class </em><tt class="descclassname">tap.common.tap_gpio.</tt><tt class="descname">Tap_GPIO</tt><a class="reference internal" href="_modules/tap/common/tap_gpio.html#Tap_GPIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap_gpio.Tap_GPIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>class for Raspberry Pi GPIO</p>
+<dl class="method">
+<dt id="tap.common.tap_gpio.Tap_GPIO.clean_up">
+<tt class="descname">clean_up</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap_gpio.html#Tap_GPIO.clean_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap_gpio.Tap_GPIO.clean_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset used ports back to input mode</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap_gpio.Tap_GPIO.delay">
+<tt class="descname">delay</tt><big>(</big><em>delay=0</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap_gpio.html#Tap_GPIO.delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap_gpio.Tap_GPIO.delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>set artificial delay for setup, hold etc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>(Optional)</strong> (<em>delay</em>) &#8211; time in seconds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap_gpio.Tap_GPIO.read_tdo_data">
+<tt class="descname">read_tdo_data</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tap/common/tap_gpio.html#Tap_GPIO.read_tdo_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap_gpio.Tap_GPIO.read_tdo_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>read TDO data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; the TDO data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tap.common.tap_gpio.Tap_GPIO.set_io_data">
+<tt class="descname">set_io_data</tt><big>(</big><em>tms</em>, <em>tdi</em>, <em>tck</em><big>)</big><a class="reference internal" href="_modules/tap/common/tap_gpio.html#Tap_GPIO.set_io_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.common.tap_gpio.Tap_GPIO.set_io_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>set GPIO pin data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tms</strong> (<em>int (0/1)</em>) &#8211; data for TMS pin</li>
+<li><strong>tdi</strong> (<em>int (0/1)</em>) &#8211; data for TDI pin</li>
+<li><strong>tck</strong> (<em>int (0/1)</em>) &#8211; data for TCK pin</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">common Package</a><ul>
+<li><a class="reference internal" href="#module-tap.common.loopback"><tt class="docutils literal"><span class="pre">loopback</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-tap.common.tap"><tt class="docutils literal"><span class="pre">tap</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-tap.common.tap_gpio"><tt class="docutils literal"><span class="pre">tap_gpio</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tap.html"
+                        title="previous chapter">tap Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tap.examples.html"
+                        title="next chapter">examples Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tap.common.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.examples.html" title="examples Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tap.html" title="tap Package"
+             >previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" >tap Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

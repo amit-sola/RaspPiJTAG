@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tap.common.tap_gpio &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tap.common.tap_gpio</h1><div class="highlight"><pre>
+<span class="c">##########################################################</span>
+<span class="c"># PSU ECE510 Post-silicon Validation Project 1</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Filename: tap_gpio.py</span>
+<span class="c"># --------------------------------------------------------</span>
+<span class="c"># Purpose: TAP Controller GPIO Pins Setup</span>
+<span class="c">##########################################################</span>
+
+<span class="kn">import</span> <span class="nn">RPi.GPIO</span> <span class="kn">as</span> <span class="nn">GPIO</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c">#GPIO port addresses</span>
+<span class="n">TMS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">TDO</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">TDI</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">TCK</span> <span class="o">=</span> <span class="mi">19</span>
+
+<div class="viewcode-block" id="Tap_GPIO"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap_gpio.Tap_GPIO">[docs]</a><span class="k">class</span> <span class="nc">Tap_GPIO</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; class for Raspberry Pi GPIO&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set initial states for GPIO pins &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_time</span> <span class="o">=</span> <span class="mf">0.1</span>
+    
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setwarnings</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">GPIO</span><span class="o">.</span><span class="n">BCM</span><span class="p">)</span>
+
+        <span class="c"># TMS: RPi ---&gt; TAP</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">TMS</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>    
+        <span class="c"># TDI: RPi ---&gt; TAP</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">TDI</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>    
+        <span class="c"># TCK: RPi ---&gt; TAP</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">TCK</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+        <span class="c"># TDO: RPi &lt;--- TA</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">TDO</span><span class="p">,</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">IN</span><span class="p">,</span> <span class="n">pull_up_down</span><span class="o">=</span><span class="n">GPIO</span><span class="o">.</span><span class="n">PUD_UP</span><span class="p">)</span>    
+
+        <span class="c">#set the initial data on IO pins</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TMS</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TDI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TCK</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        
+       
+<div class="viewcode-block" id="Tap_GPIO.set_io_data"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap_gpio.Tap_GPIO.set_io_data">[docs]</a>    <span class="k">def</span> <span class="nf">set_io_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tms</span><span class="p">,</span> <span class="n">tdi</span><span class="p">,</span> <span class="n">tck</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set GPIO pin data</span>
+
+<span class="sd">        :param tms: data for TMS pin</span>
+<span class="sd">        :type tms: int (0/1)</span>
+<span class="sd">        :param tdi: data for TDI pin</span>
+<span class="sd">        :type tdi: int (0/1)</span>
+<span class="sd">        :param tck: data for TCK pin</span>
+<span class="sd">        :type tck: int (0/1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TMS</span><span class="p">,</span> <span class="n">tms</span><span class="p">)</span>          
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TDI</span><span class="p">,</span> <span class="n">tdi</span><span class="p">)</span>          
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup_time</span><span class="p">)</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">TCK</span><span class="p">,</span> <span class="n">tck</span><span class="p">)</span>
+       </div>
+<div class="viewcode-block" id="Tap_GPIO.read_tdo_data"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap_gpio.Tap_GPIO.read_tdo_data">[docs]</a>    <span class="k">def</span> <span class="nf">read_tdo_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; read TDO data</span>
+
+<span class="sd">        :returns: int -- the TDO data	</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+        <span class="n">rslt</span> <span class="o">=</span> <span class="n">GPIO</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">TDO</span><span class="p">)</span>
+        <span class="c">#time.sleep(self.setup_time)</span>
+        <span class="k">return</span> <span class="n">rslt</span>
+       </div>
+<div class="viewcode-block" id="Tap_GPIO.delay"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap_gpio.Tap_GPIO.delay">[docs]</a>    <span class="k">def</span> <span class="nf">delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set artificial delay for setup, hold etc.</span>
+
+<span class="sd">        :param delay (Optional): time in seconds</span>
+<span class="sd">        :type delay: float       </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>   
+</div>
+<div class="viewcode-block" id="Tap_GPIO.clean_up"><a class="viewcode-back" href="../../../tap.common.html#tap.common.tap_gpio.Tap_GPIO.clean_up">[docs]</a>    <span class="k">def</span> <span class="nf">clean_up</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; reset used ports back to input mode &quot;&quot;&quot;</span>
+        <span class="n">GPIO</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

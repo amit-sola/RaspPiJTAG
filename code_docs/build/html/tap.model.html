@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>model Package &mdash; TAP Controller 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TAP Controller 1.0 documentation" href="index.html" />
+    <link rel="up" title="tap Package" href="tap.html" />
+    <link rel="next" title="regression Package" href="tap.regression.html" />
+    <link rel="prev" title="log Package" href="tap.log.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.regression.html" title="regression Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tap.log.html" title="log Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" accesskey="U">tap Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-package">
+<h1>model Package<a class="headerlink" href="#model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tap.model.tap_model">
+<span id="tap-model-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">tap_model</span></tt> Module<a class="headerlink" href="#module-tap.model.tap_model" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tap.model.tap_model.Tap_Model">
+<em class="property">class </em><tt class="descclassname">tap.model.tap_model.</tt><tt class="descname">Tap_Model</tt><a class="reference internal" href="_modules/tap/model/tap_model.html#Tap_Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.model.tap_model.Tap_Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>class for TAP model</p>
+<dl class="attribute">
+<dt id="tap.model.tap_model.Tap_Model.max_length">
+<tt class="descname">max_length</tt><em class="property"> = 1000</em><a class="headerlink" href="#tap.model.tap_model.Tap_Model.max_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tap.model.tap_model.Tap_Model.states">
+<tt class="descname">states</tt><em class="property"> = {'Update_DR': {'1': 'Select_DR_Scan', '0': 'Run_Test_Idle'}, 'Update_IR': {'1': 'Select_DR_Scan', '0': 'Run_Test_Idle'}, 'Test_Logic_Reset': {'1': 'Test_Logic_Reset', '0': 'Run_Test_Idle'}, 'Select_IR_Scan': {'1': 'Test_Logic_Reset', '0': 'Capture_IR'}, 'Shift_DR': {'1': 'Exit1_DR', '0': 'Shift_DR'}, 'Run_Test_Idle': {'1': 'Select_DR_Scan', '0': 'Run_Test_Idle'}, 'Exit1_DR': {'1': 'Update_DR', '0': 'Pause_DR'}, 'Shift_IR': {'1': 'Exit1_IR', '0': 'Shift_IR'}, 'Exit1_IR': {'1': 'Update_IR', '0': 'Pause_IR'}, 'Pause_IR': {'1': 'Exit2_IR', '0': 'Pause_IR'}, 'Capture_DR': {'1': 'Exit1_DR', '0': 'Shift_DR'}, 'Capture_IR': {'1': 'Exit1_IR', '0': 'Shift_IR'}, 'Pause_DR': {'1': 'Exit2_DR', '0': 'Pause_DR'}, 'Exit2_DR': {'1': 'Update_DR', '0': 'Shift_DR'}, 'Select_DR_Scan': {'1': 'Select_IR_Scan', '0': 'Capture_DR'}, 'Exit2_IR': {'1': 'Update_IR', '0': 'Shift_IR'}}</em><a class="headerlink" href="#tap.model.tap_model.Tap_Model.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tap.model.tap_model.Tap_Model.update_state">
+<tt class="descname">update_state</tt><big>(</big><em>tms</em>, <em>tck</em><big>)</big><a class="reference internal" href="_modules/tap/model/tap_model.html#Tap_Model.update_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tap.model.tap_model.Tap_Model.update_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the cur_state</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tms</strong> (<em>int (0/1)</em>) &#8211; data for TMS pin</li>
+<li><strong>tck</strong> (<em>int (0/1)</em>) &#8211; data for TCK pin</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str &#8211; current state</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">model Package</a><ul>
+<li><a class="reference internal" href="#module-tap.model.tap_model"><tt class="docutils literal"><span class="pre">tap_model</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tap.log.html"
+                        title="previous chapter">log Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tap.regression.html"
+                        title="next chapter">regression Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tap.model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tap.regression.html" title="regression Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tap.log.html" title="log Package"
+             >previous</a> |</li>
+        <li><a href="index.html">TAP Controller 1.0 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="tap.html" >tap Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jasur Hanbaba.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
